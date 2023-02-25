@@ -1,9 +1,12 @@
-import './App.css';
+import "./App.css";
+import Board from "./components/Board";
 
 function App() {
   return (
-    <div className="App">
-      hello
+    <div className="">
+      <div className="layout">
+        <Board />
+      </div>
     </div>
   );
 }
