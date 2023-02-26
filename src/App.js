@@ -3,10 +3,8 @@ import Board from "./components/Board";
 
 function App() {
   return (
-    <div className="">
-      <div className="layout">
-        <Board />
-      </div>
+    <div className="layout">
+      <Board />
     </div>
   );
 }
