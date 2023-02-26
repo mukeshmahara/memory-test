@@ -9,7 +9,8 @@ function Card({ number, handleChoice, flipped, visible }) {
     <div className="card">
       <div className={flipped ? "flipped" : " "}>
         {!visible ? (
-          <div className="
+          <div
+            className="
             flex
             justify-center
             items-center
@@ -18,7 +19,8 @@ function Card({ number, handleChoice, flipped, visible }) {
             h-full
             w-full 
             text-gray-50 
-           ">
+           "
+          >
             {number.num}
           </div>
         ) : (
