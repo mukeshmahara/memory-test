@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-const numbers = [
+const deck = [
   { num: 1, matched: false },
   { num: 2, matched: false },
   { num: 3, matched: false },
@@ -13,6 +13,7 @@ const numbers = [
 ];
 
 function Board({ tiles }) {
+  const [visible, setVisible] = useState(true);
   const [nums, setNumbers] = useState([]);
   const [turns, setTurns] = useState(0);
   const [number1, setNumber1] = useState(null);
@@ -23,7 +24,7 @@ function Board({ tiles }) {
   };
 
   const shuffleNumbers = () => {
-    const shuffledNumbers = [...numbers, ...numbers]
+    const shuffledNumbers = [...deck, ...deck]
       .sort(() => Math.random() - 0.5)
       .map((number) => ({ ...number, id: Math.random() }));
 
@@ -31,17 +32,19 @@ function Board({ tiles }) {
     setTurns(0);
   };
 
-  // const RandomizedNumbers = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
-  //   .map((item) => ({ item, sort: Math.random() }))
-  //   .sort((num1, num2) => num1.sort - num2.sort)
-  //   .map(({ item }) => item);
+  useEffect(() => {
+    shuffleNumbers();
+    setTimeout(() => makeVisible(), 2000);
+  }, []);
 
+  const makeVisible = () => {
+    setVisible(false);
+  };
   useEffect(() => {
     if (number1 && number2) {
       if (number1.num === number2.num) {
         setNumbers((prevNums) => {
           return prevNums.map((nums) => {
-            console.log(nums === number1, "hahhaha");
             if (nums.num === number1.num) {
               return { ...nums, matched: true };
             } else {
@@ -63,13 +66,6 @@ function Board({ tiles }) {
   };
   return (
     <div className="">
-      <button
-        onClick={shuffleNumbers}
-        className="border px-5 py-3 rounded text-3xl bg-indigo-50"
-      >
-        Start
-      </button>
-
       <div className="flex  justify-center ">
         <div className="card-grid">
           {nums.map((num) => (
@@ -78,10 +74,13 @@ function Board({ tiles }) {
                 number={num}
                 handleChoice={handleChoice}
                 flipped={num === number1 || num === number2 || num.matched}
+                visible={visible}
               />
             </div>
           ))}
         </div>
+        {(number1?.num === number2?.num)?<>
+        Lets start</>:<>Bingo</>}
       </div>
     </div>
   );
