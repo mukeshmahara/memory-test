@@ -66,8 +66,17 @@ function Board({ tiles }) {
   };
   return (
     <div className="">
+      {visible ? (
+        <div className="shadow font-bold animate-bounce border rounded-full p-3">
+          Remember the position of similar numbers
+        </div>
+      ) : (
+        ""
+      )}
       <div className="flex  justify-center ">
+        {!visible ? <>flipped Pairs: {turns}</> : ""}
         <div className="card-grid">
+
           {nums.map((num) => (
             <div key={num.id} className="">
               <Card
@@ -79,8 +88,6 @@ function Board({ tiles }) {
             </div>
           ))}
         </div>
-        {(number1?.num === number2?.num)?<>
-        Lets start</>:<>Bingo</>}
       </div>
     </div>
   );
