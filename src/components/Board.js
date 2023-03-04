@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import Message from "./Message";
 
 const deck = [
   { num: 1, matched: false },
@@ -14,6 +15,7 @@ const deck = [
 
 function Board({ tiles }) {
   const [visible, setVisible] = useState(true);
+  const [message, setMessage] = useState("");
   const [nums, setNumbers] = useState([]);
   const [turns, setTurns] = useState(0);
   const [number1, setNumber1] = useState(null);
@@ -41,6 +43,7 @@ function Board({ tiles }) {
     setVisible(false);
   };
   useEffect(() => {
+    
     if (number1 && number2) {
       if (number1.num === number2.num) {
         setNumbers((prevNums) => {
@@ -76,7 +79,6 @@ function Board({ tiles }) {
       <div className="flex  justify-center ">
         {!visible ? <>flipped Pairs: {turns}</> : ""}
         <div className="card-grid">
-
           {nums.map((num) => (
             <div key={num.id} className="">
               <Card
